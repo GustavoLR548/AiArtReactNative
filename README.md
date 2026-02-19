@@ -13,27 +13,28 @@ It also includes a theme system (Light/Dark/System), persisted preferences, prov
 
 ## Screens
 
-<div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;">
-	<figure style="flex:1;min-width:220px;text-align:center;margin:0;">
-		<img src="docs/OptionsMenu.jpeg" alt="Options menu" style="width:100%;height:auto;border-radius:8px;display:block;"/>
-		<figcaption>Options menu</figcaption>
-	</figure>
-	<figure style="flex:1;min-width:220px;text-align:center;margin:0;">
-		<img src="docs/Sidebar.jpeg" alt="Sidebar" style="width:100%;height:auto;border-radius:8px;display:block;"/>
-		<figcaption>Sidebar</figcaption>
-	</figure>
-	<figure style="flex:1;min-width:220px;text-align:center;margin:0;">
-		<img src="docs/TitleScreen.jpeg" alt="Title screen" style="width:100%;height:auto;border-radius:8px;display:block;"/>
-		<figcaption>Title screen</figcaption>
-	</figure>
-</div>
-
-<div style="margin-top:18px;text-align:center;">
-	<figure style="display:inline-block;max-width:820px;margin:0;">
-		<img src="docs/Image-to-Image.jpeg" alt="Image to Image" style="width:100%;height:auto;border-radius:8px;display:block;"/>
-		<figcaption>Image to Image</figcaption>
-	</figure>
-</div>
+<table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+	<tr>
+		<td style="width:33%;padding:8px;text-align:center;vertical-align:top;">
+			<img src="docs/OptionsMenu.jpeg" alt="Options menu" style="width:180px;max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto;"/>
+			<div style="font-size:13px;margin-top:6px;color:#444;">Options menu</div>
+		</td>
+		<td style="width:33%;padding:8px;text-align:center;vertical-align:top;">
+			<img src="docs/Sidebar.jpeg" alt="Sidebar" style="width:180px;max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto;"/>
+			<div style="font-size:13px;margin-top:6px;color:#444;">Sidebar</div>
+		</td>
+		<td style="width:33%;padding:8px;text-align:center;vertical-align:top;">
+			<img src="docs/TitleScreen.jpeg" alt="Title screen" style="width:180px;max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto;"/>
+			<div style="font-size:13px;margin-top:6px;color:#444;">Title screen</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" style="padding-top:14px;text-align:center;">
+			<img src="docs/Image-to-Image.jpeg" alt="Image to Image" style="width:600px;max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto;"/>
+			<div style="font-size:13px;margin-top:6px;color:#444;">Image to Image</div>
+		</td>
+	</tr>
+</table>
 
 ## Architecture highlights
 
