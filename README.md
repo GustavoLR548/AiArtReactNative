@@ -9,6 +9,32 @@ The app is built with React Native + Expo (SDK 48), React Navigation (Drawer), a
 
 It also includes a theme system (Light/Dark/System), persisted preferences, provider selection in Options, and resilient API error handling.
 
+# Examples
+
+## Screens
+
+<div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;">
+	<figure style="flex:1;min-width:220px;text-align:center;margin:0;">
+		<img src="docs/OptionsMenu.jpeg" alt="Options menu" style="width:100%;height:auto;border-radius:8px;display:block;"/>
+		<figcaption>Options menu</figcaption>
+	</figure>
+	<figure style="flex:1;min-width:220px;text-align:center;margin:0;">
+		<img src="docs/Sidebar.jpeg" alt="Sidebar" style="width:100%;height:auto;border-radius:8px;display:block;"/>
+		<figcaption>Sidebar</figcaption>
+	</figure>
+	<figure style="flex:1;min-width:220px;text-align:center;margin:0;">
+		<img src="docs/TitleScreen.jpeg" alt="Title screen" style="width:100%;height:auto;border-radius:8px;display:block;"/>
+		<figcaption>Title screen</figcaption>
+	</figure>
+</div>
+
+<div style="margin-top:18px;text-align:center;">
+	<figure style="display:inline-block;max-width:820px;margin:0;">
+		<img src="docs/Image-to-Image.jpeg" alt="Image to Image" style="width:100%;height:auto;border-radius:8px;display:block;"/>
+		<figcaption>Image to Image</figcaption>
+	</figure>
+</div>
+
 ## Architecture highlights
 
 ### 1) Multi-provider image generation
@@ -73,3 +99,7 @@ Error messaging strategy:
 	- `Stability AI (SD 3.5 Flash)`
 
 The selected provider is persisted and used across generation screens.
+
+# License 
+
+MIT
