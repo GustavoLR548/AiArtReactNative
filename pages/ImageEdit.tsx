@@ -15,7 +15,7 @@ import PromptField from "../components/CustomFields/PromptField";
 import NumSampleSlider from "../components/CustomFields/NumSampleSlider";
 import ImagesList from "../components/List/ImagesList";
 import AspectRatioPicker from "../components/CustomFields/AspectRatioPicker";
-import { AspectRatio, imageEditing } from "../api/GeminiAPI";
+import { AspectRatio, imageEditing } from "../api/ImageApiService";
 import { ThemePalette } from "../theme/palette";
 
 interface ImageEditProps {
@@ -40,6 +40,13 @@ const ImageEdit = ({
     AspectRatio.Square
   );
   const [loading, setLoading] = useState(false);
+
+  const getErrorMessage = (error: unknown) => {
+    if (error instanceof Error && error.message) {
+      return error.message;
+    }
+    return "Something went wrong while generating images.";
+  };
 
   const handleImagePicker = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -74,14 +81,19 @@ const ImageEdit = ({
         ? "Outpainting request"
         : "Inpainting request";
 
-    const images = await imageEditing(
-      `${modeHint}: ${text}`,
-      selectedImage,
-      numSamples,
-      aspectRatio
-    );
-    setGeneratedImages(images ?? []);
-    setLoading(false);
+    try {
+      const images = await imageEditing(
+        `${modeHint}: ${text}`,
+        selectedImage,
+        numSamples,
+        aspectRatio
+      );
+      setGeneratedImages(images ?? []);
+    } catch (error) {
+      Alert.alert("Generation failed", getErrorMessage(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

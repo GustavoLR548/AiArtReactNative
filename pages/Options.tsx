@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { ThemeMode, ThemePalette } from "../theme/palette";
+import {
+  getSelectedProvider,
+  setSelectedProvider,
+} from "../api/ImageApiFactory";
+import type { ImageApiProvider } from "../api/ImageApiTypes";
 
 interface OptionsProps {
   themeMode: ThemeMode;
@@ -16,6 +21,29 @@ const modes: { label: string; value: ThemeMode; description: string }[] = [
 
 const Options = ({ themeMode, onThemeModeChange, colors }: OptionsProps) => {
   const styles = createStyles(colors);
+  const [provider, setProvider] = useState<ImageApiProvider>("gemini");
+
+  useEffect(() => {
+    const loadSelectedProvider = async () => {
+      try {
+        const currentProvider = await getSelectedProvider();
+        setProvider(currentProvider);
+      } catch (error) {
+        console.error("Failed to load image provider:", error);
+      }
+    };
+
+    loadSelectedProvider();
+  }, []);
+
+  const handleProviderChange = async (nextProvider: ImageApiProvider) => {
+    try {
+      await setSelectedProvider(nextProvider);
+      setProvider(nextProvider);
+    } catch (error) {
+      console.error("Failed to save image provider:", error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -53,6 +81,57 @@ const Options = ({ themeMode, onThemeModeChange, colors }: OptionsProps) => {
               </Pressable>
             );
           })}
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Image provider</Text>
+          <Text style={styles.cardSubtitle}>Choose which AI service to use.</Text>
+
+          <Pressable
+            style={[
+              styles.optionRow,
+              provider === "gemini" && styles.optionRowSelected,
+            ]}
+            onPress={() => handleProviderChange("gemini")}
+          >
+            <View>
+              <Text style={styles.optionLabel}>Gemini</Text>
+              <Text style={styles.optionDescription}>
+                Use Google Gemini image generation.
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.radioOuter,
+                provider === "gemini" && styles.radioOuterSelected,
+              ]}
+            >
+              {provider === "gemini" ? <View style={styles.radioInner} /> : null}
+            </View>
+          </Pressable>
+
+          <Pressable
+            style={[
+              styles.optionRow,
+              provider === "stability" && styles.optionRowSelected,
+            ]}
+            onPress={() => handleProviderChange("stability")}
+          >
+            <View>
+              <Text style={styles.optionLabel}>Stability AI (SD 3.5 Flash)</Text>
+              <Text style={styles.optionDescription}>
+                Faster and lower-cost model for testing.
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.radioOuter,
+                provider === "stability" && styles.radioOuterSelected,
+              ]}
+            >
+              {provider === "stability" ? <View style={styles.radioInner} /> : null}
+            </View>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

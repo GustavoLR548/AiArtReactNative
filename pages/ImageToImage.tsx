@@ -15,7 +15,7 @@ import PromptField from "../components/CustomFields/PromptField";
 import NumSampleSlider from "../components/CustomFields/NumSampleSlider";
 import ImagesList from "../components/List/ImagesList";
 import AspectRatioPicker from "../components/CustomFields/AspectRatioPicker";
-import { AspectRatio, imageToImage } from "../api/GeminiAPI";
+import { AspectRatio, imageToImage } from "../api/ImageApiService";
 import { ThemePalette } from "../theme/palette";
 
 interface ImageToImageProps {
@@ -32,6 +32,13 @@ const ImageToImage = ({ colors }: ImageToImageProps) => {
     AspectRatio.Square
   );
   const [loading, setLoading] = useState(false);
+
+  const getErrorMessage = (error: unknown) => {
+    if (error instanceof Error && error.message) {
+      return error.message;
+    }
+    return "Something went wrong while generating images.";
+  };
 
   const handleImagePicker = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -61,14 +68,19 @@ const ImageToImage = ({ colors }: ImageToImageProps) => {
     }
 
     setLoading(true);
-    const images = await imageToImage(
-      text,
-      selectedImage,
-      numSamples,
-      aspectRatio
-    );
-    setGeneratedImages(images ?? []);
-    setLoading(false);
+    try {
+      const images = await imageToImage(
+        text,
+        selectedImage,
+        numSamples,
+        aspectRatio
+      );
+      setGeneratedImages(images ?? []);
+    } catch (error) {
+      Alert.alert("Generation failed", getErrorMessage(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -12,7 +13,7 @@ import {
 import PromptField from "../components/CustomFields/PromptField";
 import NumSampleSlider from "../components/CustomFields/NumSampleSlider";
 import ImagesList from "../components/List/ImagesList";
-import { AspectRatio, textToImage } from "../api/GeminiAPI";
+import { AspectRatio, textToImage } from "../api/ImageApiService";
 import AspectRatioPicker from "../components/CustomFields/AspectRatioPicker";
 import { ThemePalette } from "../theme/palette";
 
@@ -30,14 +31,28 @@ const TextToImage = ({ colors }: TextToImageProps) => {
   );
   const [loading, setLoading] = useState(false);
 
+  const getErrorMessage = (error: unknown) => {
+    if (error instanceof Error && error.message) {
+      return error.message;
+    }
+    return "Something went wrong while generating images.";
+  };
+
   const generateImage = async () => {
+    if (!prompt.trim()) {
+      Alert.alert("Prompt required", "Please enter a prompt to continue.");
+      return;
+    }
+
     setLoading(true);
-    let images: string[] = await textToImage(prompt, numSamples, aspectRatio);
-    console.log(images);
-    if (!images) {
-      console.log("deu ruim");
-    } else setGeneratedImages(images);
-    setLoading(false);
+    try {
+      const images = await textToImage(prompt, numSamples, aspectRatio);
+      setGeneratedImages(images ?? []);
+    } catch (error) {
+      Alert.alert("Generation failed", getErrorMessage(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
