@@ -7,7 +7,7 @@ The app is built with React Native + Expo (SDK 48), React Navigation (Drawer), a
 ## Quick setup
 
 - Use `Node.js 18.x`, `npm 9+`, `Expo CLI` via `npx`, and `OpenJDK 17` (Android builds).
-- Configure Gemini API key: set `EXPO_PUBLIC_GEMINI_API_KEY` in your environment (or replace fallback key in `api/MonsterAPI.ts`).
+- Configure Gemini API key: set `EXPO_PUBLIC_GEMINI_API_KEY` in your environment (or replace fallback key in `api/GeminiAPI.ts`).
 - Install Android tooling: Android SDK (with `platform-tools`/`adb`) and set `ANDROID_HOME` + `PATH` to include `$ANDROID_HOME/platform-tools`.
 - Install dependencies: `npm install`.
 - Start development (Expo Go): `npx expo start`.

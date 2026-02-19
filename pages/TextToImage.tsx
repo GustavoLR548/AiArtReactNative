@@ -12,7 +12,7 @@ import {
 import PromptField from "../components/CustomFields/PromptField";
 import NumSampleSlider from "../components/CustomFields/NumSampleSlider";
 import ImagesList from "../components/List/ImagesList";
-import { AspectRatio, textToImage } from "../api/MonsterAPI";
+import { AspectRatio, textToImage } from "../api/GeminiAPI";
 import AspectRatioPicker from "../components/CustomFields/AspectRatioPicker";
 import { ThemePalette } from "../theme/palette";
 

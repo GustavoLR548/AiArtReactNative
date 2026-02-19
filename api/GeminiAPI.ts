@@ -41,7 +41,7 @@ const getAspectRatioHint = (aspectRatio: AspectRatio) => {
 const ensureApiKey = () => {
   if (!GEMINI_API_KEY || GEMINI_API_KEY === "GEMINI_API_KEY_HERE") {
     throw new Error(
-      "Gemini API key not configured. Set EXPO_PUBLIC_GEMINI_API_KEY or update api/MonsterAPI.ts."
+      "Gemini API key not configured. Set EXPO_PUBLIC_GEMINI_API_KEY or update api/GeminiAPI.ts."
     );
   }
 };

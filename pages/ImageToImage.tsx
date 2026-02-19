@@ -15,7 +15,7 @@ import PromptField from "../components/CustomFields/PromptField";
 import NumSampleSlider from "../components/CustomFields/NumSampleSlider";
 import ImagesList from "../components/List/ImagesList";
 import AspectRatioPicker from "../components/CustomFields/AspectRatioPicker";
-import { AspectRatio, imageToImage } from "../api/MonsterAPI";
+import { AspectRatio, imageToImage } from "../api/GeminiAPI";
 import { ThemePalette } from "../theme/palette";
 
 interface ImageToImageProps {

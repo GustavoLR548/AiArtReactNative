@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import { View, StyleSheet, Text } from "react-native";
-import { AspectRatio } from "../../api/MonsterAPI";
+import { AspectRatio } from "../../api/GeminiAPI";
 import { ThemePalette } from "../../theme/palette";
 
 interface AspectRatioPickerProps {
