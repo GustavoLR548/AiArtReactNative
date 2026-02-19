@@ -150,3 +150,7 @@ package-lock.json
 # Expo
 .expo/
 .expo-shared/
+
+# Expo managed workflow native folders
+android/
+ios/
