@@ -1,15 +1,17 @@
 import { View, Text, StyleSheet, Modal } from "react-native";
 import TouchableImageDisplay from "../ImageDisplay/TouchableImageDisplay";
-import Show from "../Util/Show";
 import { useState } from "react";
 import ImageView from "react-native-image-viewing";
 import { ImageSource } from "react-native-image-viewing/dist/@types";
+import { ThemePalette } from "../../theme/palette";
 
 interface ImagesListProps {
   imagesList: string[];
+  colors?: ThemePalette;
 }
 
-const ImagesList = ({ imagesList }: ImagesListProps) => {
+const ImagesList = ({ imagesList, colors }: ImagesListProps) => {
+  const styles = createStyles(colors);
   const [showModal, setShowModal] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
 
@@ -40,6 +42,7 @@ const ImagesList = ({ imagesList }: ImagesListProps) => {
         <TouchableImageDisplay
           imageUri={value}
           key={index}
+          colors={colors}
           onImagePressed={() => imagePressedHandler(index)}
         />
       ))}
@@ -47,21 +50,20 @@ const ImagesList = ({ imagesList }: ImagesListProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-    width: "100%",
-    height: "100%",
-
-    paddingLeft: 35,
-    paddingRight: 35,
-    paddingBottom: 65,
-  },
-  title: {
-    textAlign: "center",
-  },
-});
+const createStyles = (colors?: ThemePalette) =>
+  StyleSheet.create({
+    container: {
+      gap: 10,
+      width: "100%",
+      paddingBottom: 8,
+    },
+    title: {
+      textAlign: "left",
+      color: colors?.text ?? "#111827",
+      fontSize: 14,
+      fontWeight: "500",
+      marginBottom: 2,
+    },
+  });
 
 export default ImagesList;
